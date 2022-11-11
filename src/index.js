@@ -4,30 +4,45 @@ import './index.css';
 //import App from './App';
 //import reportWebVitals from './reportWebVitals';
 
-class Square extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: '-',
-    };
-  }
-  render() {
-    return (
-      <button className="square" onClick={() => this.setState({value: 'X'})}>
-        {this.state.value}
-      </button>
-    );
-  }
+const Square = (props) => {
+  return (
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
 }
 
 
 class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      squares: Array(9).fill(null),
+      xIsNext: true,
+    };
+  }
+
+  handleClick(i) {
+    const aux = JSON.parse(JSON.stringify(this.state.squares));
+    aux[i] = this.state.xIsNext ? "X" : "O";
+    this.setState({
+      squares: aux,
+      xIsNext: !this.state.xIsNext,
+    });
+    /*
+     const aux = this.state.squares.slice();
+         aux[i] = "X";
+         this.setState({squares: aux});
+    */
+
+  }
+
   renderSquare(i) {
-    return <Square />;
+    return <Square value={this.state.squares[i]} onClick={() => this.handleClick(i)} />;
   }
 
   render() {
-    const status = 'Next player: X';
+    const status = 'Next player: ' + (this.state.xIsNext ? "X" : "O");
 
     return (
       <div>
