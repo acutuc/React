@@ -11,10 +11,10 @@ const Euros = (props) => {
   return <>{props.euros}</>;
 }
 
-//ÚNICO COMPONENTE (está importado de la carpeta "componentes")
-//const Moneda = (props) => {
-//  return <>{props.moneda}</>;
-//}
+//  ÚNICO COMPONENTE (está importado de la carpeta "componentes")
+//  const Moneda = (props) => {
+//    return <>{props.moneda}</>;
+//  }
 
 class App extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class App extends Component {
     if (e >= 0) this.setState({ euros: e })
   }
   render() {
-    //
+    
     return (
       <>
         <Moneda moneda={this.state.euros} /> Euros equivalen a <Moneda moneda={this.state.euros * this.state.factor} /> dólares<br />

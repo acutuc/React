@@ -1,26 +1,42 @@
 import logo from './logo.svg';
 import './App.css';
-import GODOS from './componentes/Godos.js';
+import GODOS from './componentes/Godos';
+import { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+//COMPONENTE:
+const DisplayGodos = (props) => {
+  let lista = props.godos.map(
+    e => {
+      return (
+        <li key={e.id}>
+          <h2>{e.nombre}</h2>
+          <p>{e.texto}</p>
+        </li>
+      )
+    }
   );
+  return (
+    <>{lista}</>
+  );
+}
+
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      godos: GODOS,
+    }
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <DisplayGodos godos={this.state.godos} />
+
+      </div>
+    );
+  }
 }
 
 export default App;
