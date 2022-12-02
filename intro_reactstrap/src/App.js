@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import { Button } from 'reactstrap';
 import { Component } from 'react';
 import Sino from './componentes/SinoComponent';
 
@@ -16,6 +17,7 @@ class App extends Component() {
         <div className='App'>
           <Sino 
             imagen={this.state.imagen}
+            titulo = "Si o no?!¿?¿?¿?¿"
           />
         </div>
       );
