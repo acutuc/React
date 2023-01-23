@@ -17,6 +17,8 @@ class App extends Component {
       menuItem: undefined,
       info: "",
       logged: false,
+      //titulo:"",
+      
     }
   }
 
@@ -47,6 +49,10 @@ class App extends Component {
 
   setInfo(i) {
     this.setState({ info: i })
+  }
+
+  setTitulo(t){
+    this.setState({titulo : t})
   }
 
   render() {

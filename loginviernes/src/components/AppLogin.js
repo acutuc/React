@@ -5,11 +5,10 @@ export default function AppLogin(props) {
     //Definimos dos hooks:
     const [password, setPassword] = useState('');
     const [telefono, setTelefono] = useState('');
-    const [info, setInfo] = useState('');
     
 
     //Constantes:
-    const handleChange = (event) =>{
+    const handleChange = (event) =>{//En event, se guarda el evento (click, cambio, recarga...)
         if(event.target.name === "telefono"){
             setTelefono(event.target.value);
         }

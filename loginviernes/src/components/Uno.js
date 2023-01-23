@@ -5,12 +5,12 @@ export default function Uno(props) {
     const [texto,setTexto]=useState('');
 
     const handleChange=(event)=>{
-      if (event.target.name=="texto"){
+      if (event.target.name === "texto"){
         setTexto(event.target.value)
       }
     }
     const clicar=()=>{
-      if (texto!=''){
+      if (texto !== ''){
         props.setTitulo(texto)
       }
     }
