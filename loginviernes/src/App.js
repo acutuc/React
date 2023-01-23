@@ -16,7 +16,7 @@ class App extends Component {
     this.state = {
       menuItem: undefined,
       info: "",
-      logged:false,
+      logged: false,
     }
   }
 
@@ -33,11 +33,11 @@ class App extends Component {
         password: password
       })
     ).then(res => {
-      if(res.data.usuario !== undefined){
+      if (res.data.usuario !== undefined) {
         //Se conecta:
-        this.setState({logged:true})
+        this.setState({ logged: true })
       }
-      this.setState({info:res.data.mensaje})
+      this.setState({ info: res.data.mensaje })
     }
     )
     //Comprobamos que pasa telefono y password:
@@ -52,13 +52,22 @@ class App extends Component {
   render() {
     let obj = [];
     //Si no está logueado, mostramos AppLogin para el inicio de sesión:
-    if(!this.state.logged){
+    if (!this.state.logged) {
       obj.push(<AppLogin setInfo={(i) => this.setInfo(i)} userLogin={(telefono, password) => this.userLogin(telefono, password)} info={this.state.info}></AppLogin>)
-    }else{
-      obj.push(<Titulo titulo={this.state.titulo}/>)
-      if (this.state.menuItem==="UNO") obj.push(<Uno setTitulo={(t)=>this.setTitulo(t)}/>)
-      if (this.state.menuItem==="DOS") obj.push(<Dos setTitulo={(t)=>this.setTitulo(t)}/>)
-      if (this.state.menuItem==="TRES") obj.push(<Tres setTitulo={(t)=>this.setTitulo(t)}/>)
+    } else {
+      obj.push(
+        <Menu menuItem={this.state.menuItem} changeMenu={(item) => this.changeMenu(item)} />
+      )
+      obj.push(<Titulo titulo={this.state.titulo} />)
+      if (this.state.menuItem === "UNO") {
+        obj.push(<Uno setTitulo={(t) => this.setTitulo(t)} />)
+      }
+      if (this.state.menuItem === "DOS") {
+        obj.push(<Dos setTitulo={(t) => this.setTitulo(t)} />)
+      }
+      if (this.state.menuItem === "TRES") {
+        obj.push(<Tres setTitulo={(t) => this.setTitulo(t)} />)
+      }
     }
 
     return (
