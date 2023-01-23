@@ -1,16 +1,32 @@
+import { React, useState } from 'react';
 import {Row, Col, Card, CardTitle, Form, FormGroup, Label, Input, Button, CardText} from 'reactstrap';
 
 export default function AppLogin(props) {
+    //Definimos dos hooks:
+    const [password, setPassword] = useState('');
+    const [telefono, setTelefono] = useState('');
+    const [info, setInfo] = useState('');
+    
+
     //Constantes:
     const handleChange = (event) =>{
-
+        if(event.target.name === "telefono"){
+            setTelefono(event.target.value);
+        }
+        if(event.target.name === "password"){
+            setPassword(event.target.value);
+        }
+        //Comprobamos:
+        //setInfo(password);
     }
 
     const clicar = () =>{
-
+        if(password === "" || telefono === ""){
+            props.setInfo("CUMPLIMENTE TODOS LOS CAMPOS");
+            return;
+        }
+        props.userLogin(telefono, password);
     }
-
-    const 
 
     return (
         <Row>
@@ -44,7 +60,7 @@ export default function AppLogin(props) {
                         <Button color="primary" size="lg" block onClick={clicar} >
                             <strong>Log in</strong>
                         </Button>
-                        <CardText className="text-danger">{info}</CardText>
+                        <CardText className="text-danger">{props.info}</CardText>
 
                     </Form>
                 </Card>
