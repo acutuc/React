@@ -13,7 +13,6 @@ export default function Menu(props){
 
     const handleSubmit = () =>{
         props.anadirLista(cosa)
-        console.log(props.lista)
     }
 
     return(
