@@ -1,13 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
-import {Button} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AppLogin from './componentes/AppLogin'
-import Menu from './componentes/Menu'
+import AppLogin from './components/AppLogin'
+import Menu from './components/Menu'
 import { Component } from 'react';
-import {PHPLOGIN} from './componentes/Datos';
+import {PHPLOGIN} from './components/Datos';
 import axios from 'axios';
-import VentanaModalUser from './componentes/VentanaModalUser';
+import VentanaModalUser from './components/VentanaModalUser';
 
 class App extends Component {
   constructor(props){
@@ -28,28 +26,20 @@ class App extends Component {
   
   toggleModal(){
     this.setState({isOpen:!this.state.isOpen})
-    //  setIsOpen(!isOpen)
   }
 
-
   userLogin(telefono,password){
-    
-    if (telefono=="Myfpschool" && password=="2023"){
-      this.setState({logged:true})
-    }
-    
-   /*
     axios.post(PHPLOGIN,JSON.stringify({
       telefono:telefono,
       password:password
     }))
     .then(res => {
       console.log(res.data.usuario);
-      if ( res.data.usuario !== undefined){
+      if (res.data.usuario !== undefined){
         this.setState({logged:true});
       }
     })
-    */
+    
   }
 
   render(){

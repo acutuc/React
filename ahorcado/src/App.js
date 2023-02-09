@@ -9,12 +9,15 @@ class App extends Component {
     super(props);
     this.state = {
       intento: 0,
+      palabraAdivinar:"helicoptero"
     }
   }
 
   seleccionaImagen = () => {
 
   }
+
+  
 
   render() {
     return (

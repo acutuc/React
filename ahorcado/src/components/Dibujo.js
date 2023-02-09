@@ -19,6 +19,7 @@ export default function Dibujo(props) {
         obj.push(<>
             <img src="images/ahorcado1.jpeg" alt="imagen1" />
             <Input
+            className='boton'
                 type='text'
                 placeholder='¡Introduce una letra y prueba!'
                 maxLength="1"

@@ -1,5 +1,7 @@
 
 import React, { useState } from 'react';
+import axios from 'axios';
+import { PHPINSERT } from './Insert';
 import { Input, Button, Modal, ModalHeader, ModalBody, ModalFooter,Label } from 'reactstrap';
 
 const VentanaModalUser = (props)=>{
@@ -14,28 +16,36 @@ const VentanaModalUser = (props)=>{
     const handleChange = (event) => {
         const target = event.target;
         //console.log(event.target.value)
-        if (target.name == "nombre") {
+        if (target.name === "nombre") {
           setNombre(target.value);
         }
-        if (target.name == "telefono") {
+        if (target.name === "telefono") {
             setTelefono(target.value);
         }
-        if (target.name == "password") {
+        if (target.name === "password") {
           setPassword(target.value);
         }
-        if (target.name == "saldo") {
+        if (target.name === "saldo") {
           setSaldo(target.value);
         }
-        if (target.name == "admincheck") {
+        if (target.name === "admincheck") {
           setAdmincheck(target.value);
         }
     }
 
     const clicar=()=>{
-        if (nombre===''||telefono===''||password==='') return;
-        // llamada axios alta
+        if (nombre === '' || telefono === '' || password === '') return;
+        axios.post(PHPINSERT,JSON.stringify({
+          telefono:telefono,
+          nombre:nombre,
+          password:password,
+          saldo:saldo,
+          tipo:admincheck,
+        }))
         props.toggle();
-    }
+      }
+        
+    
 
     return(
         <Modal isOpen={props.mostrar} toggle={props.toggle} className={className}>
@@ -55,4 +65,5 @@ const VentanaModalUser = (props)=>{
       </Modal>
     );
 }
+
 export default VentanaModalUser;
