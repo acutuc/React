@@ -2,7 +2,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
 import Dibujo from './components/Dibujo';
-import { Button, Input } from 'reactstrap';
+import Palabra from './components/Palabra';
 
 class App extends Component {
   constructor(props) {
@@ -17,12 +17,19 @@ class App extends Component {
 
   }
 
-  
+  comprueba(intento){
+    let copiaIntento = this.state.intento;
 
+    if(intento === true){
+      
+    }
+  }
+  
   render() {
     return (
       <div className="App">
-        <Dibujo intento={this.state.intento} />
+        <Dibujo intento={this.state.intento} palabraAdivinar={this.state.palabraAdivinar}/>
+        <Palabra palabraAdivinar={this.state.palabraAdivinar}/>
       </div>
     );
   }
