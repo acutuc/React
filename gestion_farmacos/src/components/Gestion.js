@@ -9,9 +9,15 @@ import {
     ToastHeader,
     ToastBody,
     Input,
-    Button
+    Button,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    Label,
+    ModalFooter
 } from 'reactstrap';
-import Farmacos from './Farmacos';
+import { FARMACOS } from './Farmacos';
+import Ventana from './Ventana';
 import axios from 'axios';
 
 function Gestion(props) {
@@ -25,10 +31,10 @@ function Gestion(props) {
         }
     };
 
-    function clicar(){
-        axios.post(Farmacos,JSON.stringify({
-            
-          }))
+    function clicar() {
+        axios.post(FARMACOS, JSON.stringify({
+
+        }))
     }
 
     return (
@@ -45,20 +51,24 @@ function Gestion(props) {
                                     </ToastHeader>
                                     <ToastBody>
                                         <Input >{props.medicamentos}</Input>
-                                        <Button color="info" onClick={clicar}>Add</Button>&nbsp;
-                                        <Button color="info">Clear</Button>
+                                        <div className='d-flex justify-content-center p-3'>
+                                            <Ventana color="info"/>&nbsp;
+                                            <Button color="info">Clear</Button>
+                                        </div>
                                     </ToastBody>
                                 </Toast>
                             </div>
                             <div className="p-3 bg-danger my-2 rounded">
                                 <Toast>
                                     <ToastHeader>
-                                        Incluir X medicamentos:
+                                        Excluir X medicamentos:
                                     </ToastHeader>
                                     <ToastBody>
-                                        <Input >{}</Input>
-                                        <Button color="danger">Add</Button>&nbsp;
-                                        <Button color="danger">Clear</Button>
+                                        <Input >{ }</Input>
+                                        <div className='d-flex justify-content-center p-3'>
+                                            <Ventana color="danger"/>&nbsp;
+                                            <Button color="danger">Clear</Button>
+                                        </div>
                                     </ToastBody>
                                 </Toast>
                             </div>
@@ -67,6 +77,7 @@ function Gestion(props) {
                     </AccordionBody>
                 </AccordionItem>
             </Accordion>
+            
         </div>
     );
 }
