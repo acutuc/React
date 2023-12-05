@@ -35,7 +35,6 @@ class App extends Component {
     for (let i = 0; i < copiaEstado.cantidadMinas; i++) {
 
     }
-    console.log(this.generaNumero(1, 10))
   }
 
   bajarMinas() {
@@ -68,7 +67,7 @@ class App extends Component {
         />
         <Campo
           minas={this.state.cantidadMinas}
-          generaNumero={() => this.generaNumero(0,9)}
+          generaNumero={(x, y) => this.generaNumero(x, y)}
         />
       </>
     );
