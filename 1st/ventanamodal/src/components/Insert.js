@@ -1,0 +1,1 @@
+export const PHPINSERT = "http://localhost/DWEC/login/insert.php";
