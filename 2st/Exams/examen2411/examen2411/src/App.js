@@ -43,9 +43,9 @@ class App extends React.Component {
 
 
 
-function Botoncillo(props) {
+const Botoncillo = ({color, cambia}) => {
   return (
-    <Button color={props.color} onClick={props.cambia}> </Button>
+    <Button color={color} onClick={cambia}> </Button>
   );
 }
 
