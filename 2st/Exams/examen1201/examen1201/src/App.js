@@ -14,12 +14,14 @@ const MapaBotones = ({ listaBotones, clica }) => {
         lista2.push(<Button
           key={i * 10 + j}
           onClick={() => clica(i, j)}
-          outline
+          outline={listaBotones[i][j].outline}
+          color={listaBotones[i][j].color}
         />)
       } else {
         lista2.push(<Button
           key={i * 10 + j}
-          outline
+          outline={listaBotones[i][j].outline}
+          color={listaBotones[i][j].color}
         />)
       }
     }
@@ -38,7 +40,6 @@ const MapaBotones = ({ listaBotones, clica }) => {
 }
 
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -51,19 +52,35 @@ class App extends Component {
   clica(x, y) {
     // x se supone que la columna, y la fila
     console.log(x + " " + y)
+    let copiaState = this.state;
+
+      let contador = 8
+      let encontrado = false;
+
+      while(!encontrado && contador !== 0){
+        if(copiaState.listaBotones[contador][y].color === "secondary"){
+          copiaState.listaBotones[contador][y].color = "primary";
+          copiaState.listaBotones[contador][y].outline = false;
+          encontrado = true;
+        }
+        contador--
+      }
+
+    this.setState({ copiaState })
 
   }
 
   componentWillMount() {
     let copiaState = this.state;
-    
+
     for (let i = 0; i < copiaState.listaBotones.length; i++) {
       let lista = []
-      for(let j = 0; j < copiaState.listaBotones.length; j++){
-        lista.push({outline : true})
+      for (let j = 0; j < copiaState.listaBotones.length; j++) {
+        lista.push({ outline: true, color : "secondary"})
       }
-      copiaState.listaBotones[i].push(lista)
+      copiaState.listaBotones[i] = lista
     }
+
     this.setState({ copiaState });
   }
 
@@ -72,8 +89,8 @@ class App extends Component {
       <div className="App">
         <h1> BUCHACA </h1>
         <MapaBotones
-        listaBotones={this.state.listaBotones}
-        clica={this.clica}
+          listaBotones={this.state.listaBotones}
+          clica={(x, y) => this.clica(x, y)}
         />
       </div>
     );
