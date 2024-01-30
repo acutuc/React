@@ -7,14 +7,22 @@ const Botonera = ({ tablero, mueveFicha }) => {
         //x -> fila
         //y -> columna
         setPulsado({ fila: x, columna: y })
-        if (tablero[x-1][y].color !== "success") {
-            tablero[x-1][y-1].color = "primary";
-            tablero[x-1][y+1].color = "primary";
+        if (tablero[x - 1][y].color !== "success" && tablero[x - 1][y + 1].color !== "success" && tablero[x - 1][y - 1].color !== "success") {
+            tablero[x - 1][y - 1].color = "primary";
+            tablero[x - 1][y + 1].color = "primary";
             setPulsado({ fila: x, columna: y })
-            
         }
-        if(tablero[x][y].color === "primary"){
+        if (tablero[x][y].color === "primary") {
             tablero[x][y].color = "success";
+            
+            //Resetamos los colores azules:
+            for(let i = 0; i < 8; i++){
+                for(let j = 0; j < 8; j++){
+                    if(tablero[i][j].color === "primary"){
+                        tablero[i][j].color = "secondary";
+                    }
+                }
+            }
         }
     }
     console.log(pulsado)
