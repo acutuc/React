@@ -1,8 +1,12 @@
 
-const TotalPersonas = ({poblacion}) => {
-
-    return(
-        <p>Total de personas: {poblacion.length}</p>
+const TotalPersonas = ({ poblacion }) => {
+    const total = (poblacion) => {
+        let total = 0;
+        poblacion.map(e => e.map(f => total+= f))
+        return (total)
+    }
+    return (
+        <p>Total de personas: <strong>{total(poblacion)}</strong></p>
     )
 }
 

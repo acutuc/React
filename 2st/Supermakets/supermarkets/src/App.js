@@ -2,10 +2,11 @@ import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import MapaPersonas from './components/MapaPersonas';
 import TotalPersonas from './components/TotalPersonas';
+import { useState } from 'react';
 
 const App = () => {
 
-  const poblacion = [
+  const POBLACION = [
     [0, 5, 4, 2, 9, 8, 0, 8, 8],
     [1, 7, 21, 23, 44, 5, 3, 4, 0],
     [2, 6, 32, 22, 33, 8, 4, 2, 8],
@@ -17,16 +18,24 @@ const App = () => {
     [1, 0, 12, 3, 0, 0, 21, 2, 2]
   ];
 
+  const [supermercados, setSupermercados] = useState([
+    { fila: null, columna: null }
+  ])
+
+  console.log(supermercados)
+
   return (
     <>
-    <div className="App">
-      <MapaPersonas
-      poblacion = {poblacion}
+      <div className="App">
+        <MapaPersonas
+          poblacion={POBLACION}
+          supermercados = {supermercados}
+          setSupermercados={setSupermercados}
+        />
+      </div>
+      <TotalPersonas
+        poblacion={POBLACION}
       />
-    </div>
-    <TotalPersonas
-    poblacion={poblacion}
-    />
     </>
   );
 }
