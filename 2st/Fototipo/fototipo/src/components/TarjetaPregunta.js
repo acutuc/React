@@ -1,5 +1,5 @@
-import { Card, CardBody, CardTitle, CardSubtitle, CardText, Input } from 'reactstrap';
-const TarjetaPregunta = ({pregunta, idPregunta}) => {
+import { Card, CardBody, CardTitle, Input, Label } from 'reactstrap';
+const TarjetaPregunta = ({pregunta, idPregunta, respuestas, onChange}) => {
 
     return (
         <>
@@ -14,19 +14,19 @@ const TarjetaPregunta = ({pregunta, idPregunta}) => {
                     <CardTitle tag="h5">
                         {pregunta}
                     </CardTitle>
-                    <CardSubtitle
-                        className="mb-2 text-muted"
-                        tag="h6"
-                    >
-                        Card subtitle
-                    </CardSubtitle>
-                    <CardText>
-                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                    </CardText>
-                    <Input
-                    type='radio'
-                    name={idPregunta}
-                    />
+                    {respuestas.map(e => {
+
+                        const idUnico = idPregunta + "_" + e.puntuacion;
+
+                        return(<><Input
+                            type='radio'
+                            name={idPregunta}
+                            id={idUnico}
+                            value={e.puntuacion}
+                            onChange={() => onChange(idPregunta, e.puntuacion)}
+                            /> &nbsp;
+                            <Label for={idUnico}>{e.respuesta}</Label><br/></>)
+                    })}
                 </CardBody>
             </Card>
         </>

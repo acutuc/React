@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { Navbar, NavbarBrand } from 'reactstrap';
 
-const Cabecera = () => {
+const Cabecera = ({imagen}) => {
 
     return (
         <Navbar
@@ -12,7 +11,7 @@ const Cabecera = () => {
             <NavbarBrand href="/">
                 <img
                     alt="Logo"
-                    src="/images/logo/demeter-logo-contorno-transp-green.png"
+                    src={imagen}
                     style={{
                         height: 40,
                         width: 40
