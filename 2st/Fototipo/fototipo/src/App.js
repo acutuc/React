@@ -15,33 +15,33 @@ const App = () => {
 
 
   const determinarTipo = (puntuacion) => {
-    if (puntuacion >= 0 && puntuacion <8) {
+    if (puntuacion >= 0 && puntuacion < 8) {
       return 1;
     } else if (puntuacion >= 8 && puntuacion < 22) {
       return 2;
-    } else if(puntuacion >= 22 && puntuacion < 42){
+    } else if (puntuacion >= 22 && puntuacion < 42) {
       return 3;
-    }else if(puntuacion >= 42 && puntuacion < 68){
+    } else if (puntuacion >= 42 && puntuacion < 68) {
       return 4;
-    }else if(puntuacion >= 68 && puntuacion < 84){
+    } else if (puntuacion >= 68 && puntuacion < 84) {
       return 5;
-    }else{
+    } else {
       return 6;
     }
   };
 
   const determinarExplicacionTipo = (puntuacion) => {
-    if (puntuacion >= 0 && puntuacion <8) {
+    if (puntuacion >= 0 && puntuacion < 8) {
       return "Muy sensible a la luz solar";
     } else if (puntuacion >= 8 && puntuacion < 22) {
       return "Sensible a la luz solar";
-    } else if(puntuacion >= 22 && puntuacion < 42){
+    } else if (puntuacion >= 22 && puntuacion < 42) {
       return "Sensibilidad normal a la luz solar";
-    }else if(puntuacion >= 42 && puntuacion < 68){
+    } else if (puntuacion >= 42 && puntuacion < 68) {
       return "La piel tiene tolerancia a la luz solar";
-    }else if(puntuacion >= 68 && puntuacion < 84){
+    } else if (puntuacion >= 68 && puntuacion < 84) {
       return "La piel es oscura. Alta tolerancia";
-    }else{
+    } else {
       return "La piel es negra. Altísima tolerancia";
     }
   };
@@ -71,7 +71,7 @@ const App = () => {
     const puntuacionTotal = calcularSuma();
     const rutaImagen = "/images/tipos/tipo" + determinarTipo(puntuacionTotal) + ".png";
     setImagenMostrada(rutaImagen);
-    setBotonVisible(false); 
+    setBotonVisible(false);
     setFormularioVisible(false)
   };
 
@@ -93,16 +93,16 @@ const App = () => {
       <Cabecera
         imagen={imagen}
       />
-      {formularioVisible && 
-      DATOS.map((valor, indice) => (
-        <TarjetaPregunta
-          key={indice}
-          pregunta={(indice + 1) + ". " + valor.pregunta}
-          idPregunta={valor.idPregunta}
-          respuestas={valor.respuestas}
-          onChange={handleRespuestaChange}
-        />
-      ))}
+      {formularioVisible &&
+        DATOS.map((valor, indice) => (
+          <TarjetaPregunta
+            key={indice}
+            pregunta={(indice + 1) + ". " + valor.pregunta}
+            idPregunta={valor.idPregunta}
+            respuestas={valor.respuestas}
+            onChange={handleRespuestaChange}
+          />
+        ))}
       <Button
         color="primary"
         disabled={!todasPreguntasRespondidas()}
@@ -113,9 +113,9 @@ const App = () => {
       </Button>
       {imagenMostrada && (
         <>
-        <h2>Fototipo {determinarTipo(calcularSuma())}</h2>
-        <h4>{determinarExplicacionTipo(calcularSuma())}</h4>
-        <img src={imagenMostrada} alt="Resultado" style={{ marginTop: '20px', maxWidth: '100%' }} />
+          <h2>Fototipo {determinarTipo(calcularSuma())}</h2>
+          <h4>{determinarExplicacionTipo(calcularSuma())}</h4>
+          <img src={imagenMostrada} alt="Resultado" style={{ marginTop: '20px', maxWidth: '100%' }} />
         </>
       )}
     </div>
