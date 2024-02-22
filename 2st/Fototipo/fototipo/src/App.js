@@ -5,6 +5,7 @@ import DATOS from './components/Datos';
 import Cabecera from './components/Cabecera';
 import TarjetaPregunta from './components/TarjetaPregunta';
 import { useState } from 'react';
+import axios from "axios";
 
 const App = () => {
   const [respuestas, setRespuestas] = useState({});
@@ -67,12 +68,29 @@ const App = () => {
     }, 0);
   };
 
-  const handleClickEnviarRespuestas = () => {
+  const enviarRespuestas = async () => {
+    try {
+      // Realizar la llamada a la API con Axios
+      const respuestaApi = await axios.get('http://localhost/DWEC/servicios_rest/idFototipo/'+determinarTipo(calcularSuma()), {
+        respuestas: respuestas,
+        puntuacionTotal: calcularSuma(),
+        tipo: determinarTipo(calcularSuma()),
+        explicacionTipo: determinarExplicacionTipo(calcularSuma())
+      });
+      console.log('Respuesta de la API:', respuestaApi.data);
+    } catch (error) {
+      console.error('Error al enviar respuestas:', error.message);
+    }
+  };
+
+  const handleClickEnviarRespuestas = async () => {
+    await enviarRespuestas(); 
+    
     const puntuacionTotal = calcularSuma();
     const rutaImagen = "/images/tipos/tipo" + determinarTipo(puntuacionTotal) + ".png";
     setImagenMostrada(rutaImagen);
     setBotonVisible(false);
-    setFormularioVisible(false)
+    setFormularioVisible(false);
   };
 
   //Cargamos todas las tarjetas en un array:
