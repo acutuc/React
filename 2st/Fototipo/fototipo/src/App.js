@@ -87,7 +87,7 @@ const App = () => {
     await enviarRespuestas(); 
     
     const puntuacionTotal = calcularSuma();
-    const rutaImagen = "/images/tipos/tipo" + determinarTipo(puntuacionTotal) + ".png";
+    const rutaImagen = "/2DAW2024/GABRIEL/images/tipos/tipo" + determinarTipo(puntuacionTotal) + ".png";
     setImagenMostrada(rutaImagen);
     setBotonVisible(false);
     setFormularioVisible(false);
@@ -104,7 +104,7 @@ const App = () => {
   }
 
   //src para la imagen de cabecera:
-  const imagen = "/images/logo/demeter-logo-contorno-transp-green.png";
+  const imagen = "/2DAW2024/GABRIEL/images/logo/demeter-logo-contorno-transp-green.png";
 
   return (
     <div className="App">
