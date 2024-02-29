@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import MapaPersonas from './components/MapaPersonas';
 import TotalPersonas from './components/TotalPersonas';
 import React from 'react';
+import Supermercados from './components/Supermercados';
 
 
 class App extends React.Component {
@@ -23,6 +24,9 @@ class App extends React.Component {
       supermercados: [{
         //inicializado en componentwillmount
       }],
+      supers: [
+        //Aqui es cuando YA se ha pulsado sobre una coordenada
+      ]
     };
 
   }
@@ -33,7 +37,7 @@ class App extends React.Component {
     for (let i = 0; i < copiaState.poblacion.length; i++) {
       arr.push([]);
       for (let j = 0; j < copiaState.poblacion[i].length; j++) {
-        arr[i].push({ color: "secondary" })
+        arr[i].push({ color: "secondary", posX: "", posY: "" })
       }
     }
     copiaState.supermercados = arr;
@@ -42,17 +46,60 @@ class App extends React.Component {
 
   setSupermercado = (x, y) => {
     let copiaState = this.state;
+    let copiaSupers = []
+
+    // Función para calcular la suma de 'secondary' alrededor
+    const calcularSumaSecondary = (x, y) => {
+      let suma = 0;
+      for (let i = Math.max(0, x - 1); i <= Math.min(x + 1, copiaState.supermercados.length - 1); i++) {
+        for (let j = Math.max(0, y - 1); j <= Math.min(y + 1, copiaState.supermercados[i].length - 1); j++) {
+          if (copiaState.supermercados[i][j].color === "secondary") {
+            suma += copiaState.poblacion[i][j];
+          }
+        }
+      }
+      return suma;
+    }
+
+    // Si pulso en un supermercado existente, lo eliminamos:
     if (copiaState.supermercados[x][y].color === "danger") {
+      copiaState.supers.forEach(e => {
+        if (e.posX !== x || e.posY !== y) {
+          copiaSupers.push(e)
+        }
+      });
+
       copiaState.supermercados[x][y].color = "secondary"
+      copiaState.supermercados[x][y].posX = ""
+      copiaState.supermercados[x][y].posY = ""
+      copiaState.supers = copiaSupers;
     } else {
+      const sumaAlrededor = calcularSumaSecondary(x, y);
       copiaState.supermercados[x][y].color = "danger"
+      copiaState.supermercados[x][y].posX = x
+      copiaState.supermercados[x][y].posY = y
+
+      copiaState.supers.push({ color: copiaState.supermercados[x][y].color, posX: copiaState.supermercados[x][y].posX, posY: copiaState.supermercados[x][y].posY, personas: calcularSumaSecondary(x, y) })
+
+      // Actualizar personas de supermercados circundantes
+      for (let i = Math.max(0, x - 1); i <= Math.min(x + 1, copiaState.supermercados.length - 1); i++) {
+        for (let j = Math.max(0, y - 1); j <= Math.min(y + 1, copiaState.supermercados[i].length - 1); j++) {
+          if (!(i === x && j === y) && copiaState.supermercados[i][j].color === "danger") {
+            copiaState.supers.forEach((supermercado) => {
+              if (supermercado.posX === i && supermercado.posY === j) {
+                supermercado.personas = calcularSumaSecondary(i, j);
+              }
+            });
+          }
+        }
+      }
     }
 
     this.setState({ copiaState })
   }
 
   render() {
-    
+
     return (
       <>
         <div className="App">
@@ -64,6 +111,9 @@ class App extends React.Component {
         </div>
         <TotalPersonas
           poblacion={this.state.poblacion}
+        />
+        <Supermercados
+          supermercadosSeleccionados={this.state.supers}
         />
       </>
     );

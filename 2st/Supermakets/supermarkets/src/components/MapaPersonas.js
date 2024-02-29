@@ -5,7 +5,6 @@ const MapaPersonas = ({ poblacion, supermercados, setSupermercado }) => {
     const coordenadas = (x, y) => {
         //x -> fila
         //y -> columna
-        console.log(x + " " + y)
         
         for (let i = 0; i < poblacion.length; i++) {
             for (let j = 0; j < poblacion[i].length; j++) {
